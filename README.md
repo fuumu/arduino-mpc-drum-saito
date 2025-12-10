@@ -1,6 +1,6 @@
 # 卒業制作2025
-## 1. 概要 ![概要](https://img.shields.io/badge/%E6%A6%82%E8%A6%81-orange?style=flat-square)
-自作キーパッド + DFPlayer + RGB LEDマトリックスを使った自作MPC（Music Production Center）
+## 1. 概要 ![概要](https://img.shields.io/badge/%E6%A6%82%E8%A6%81-blue?style=for-the-badge)
+自作キーパッド + DFPlayer + RGB LEDマトリクスを使った自作MPC（Music Production Center）
 
 ### *主な機能*
 - キーパッド（4×4）で音声ファイルを選択・再生  
