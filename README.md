@@ -1,5 +1,5 @@
 # 卒業制作2025
-## 1. 概要
+## 1. 概要 ![概要](https://img.shields.io/badge/%E6%A6%82%E8%A6%81-orange?style=flat-square)
 自作キーパッド + DFPlayer + RGB LEDマトリックスを使った自作MPC（Music Production Center）
 
 ### *主な機能*
@@ -23,7 +23,7 @@
 |-------------------------------|------|----------------------------------------------------------------------|------------------------------|
 | Arduino UNO R4 WiFi           | 1個  | メインマイコン                                                       | -                            |
 | DFPlayer Mini                 | 1個  | 音源ファイルの再生                                                   | D10（TX）, D11（RX）         |
-| microSDカード                 | 1枚  | 音源データ保存（DFPlayerに挿入）                                     | -                              |
+| microSDカード                 | 1枚  | 音源データ保存（DFPlayerに挿入）                                     | -                            |
 | スピーカー                    | 1個  | 音の出力                                                             | DFPlayerのSPK_1, SPK_2       |
 | LEDマトリクス（WS2812B 8×32） | 1個  | スペクトラムアナライザを表示                                         | D6（DIN）                    |
 | キーパッド（4×4, TM1637）     | 1個  | 押したキーに対応する音を鳴らすための入力装置                         | D3（CLK）, D4（DIO）         |
@@ -50,4 +50,3 @@ graph TD
 - [ArduinoでAD入力値をFFTしてスペクトル分析＆表示をするチャレンジ](https://qiita.com/moppii/items/e5fb2407f4bae3e95c4a)
 - [ErriezTM1637ライブラリ](https://github.com/Erriez/ErriezTM1637)
 - [MP3 再生ユニットを作ってみる（Arduino使用）](https://diy-kousaku.com/p-10196/)
-
