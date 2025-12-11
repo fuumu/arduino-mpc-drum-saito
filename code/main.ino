@@ -15,28 +15,28 @@ void setup() {
   fft.input(in);
 
   printArray(Serial.list());
-  myPort = new Serial(this, Serial.list()[2], 9600); // ← ポート番号は確認してね！
+  myPort = new Serial(this, Serial.list()[2], 9600); // ← ポート番号を確認！
 }
 
 void draw() {
   background(0);
   fft.analyze(spectrum);
 
-  // データを文字列に変換して送信
+  // データを文字列に変換して送信（超スケーリング）
   String data = "";
   for (int i = 0; i < bands; i++) {
-    int level = int(spectrum[i] * 255); // 0〜255にスケーリング
+    int level = int(spectrum[i] * 1200); // 超敏感に反応！
     level = constrain(level, 0, 255);
     data += level;
     if (i < bands - 1) data += ",";
   }
-  myPort.write(data + "\n"); // 改行で区切って送信！
+  myPort.write(data + "\n");
 
   // 可視化（オプション）
   for (int i = 0; i < bands; i++) {
-    float h = spectrum[i] * height * 5;
+    float h = spectrum[i] * height * 15;
     rect(i * (width / bands), height - h, width / bands, h);
   }
 
-  delay(50); // 送信間隔を少し空ける
+  delay(30); // 少し速めに
 }
