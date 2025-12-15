@@ -48,6 +48,8 @@
 - **Processing**（ビジュアルプログラミング環境 / 音声解析とシリアル通信）
 - **Logic Pro X**（DAW / 音声出力・ドラム音源の再生）
 - **BlackHole**（仮想オーディオルーティング / ProcessingでLogic Proの音を取得）
+- **Hairless MIDI <-> Serial Bridge**（シリアル信号をMIDIに変換するブリッジツール）
+- **Audio MIDI設定（IACドライバ）**（Mac標準 / 仮想MIDIポートの作成・接続）
 
 ### Arduino使用ライブラリ
 
@@ -84,3 +86,5 @@ flowchart TD
 - [ArduinoでFFT解析し、ピークの周波数を検出する](https://qiita.com/ricelectric/items/98a6d32b1bcfca598762)
 - [ErriezTM1637ライブラリ](https://github.com/Erriez/ErriezTM1637)
 - [arduinoとprocessingの連携手順](https://note.com/nakariho/n/n92611b3c0046)
+- [Hairless MIDIをarduino MIDIライブラリと併用](https://ryokosaka.com/blog/180226.html)
+- [Arduino + GarageBand (MIDIキーボードもどき)](https://eleclog.quitsq.com/2012/04/arduino-garageband.html)
