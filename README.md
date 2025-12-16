@@ -48,7 +48,6 @@
 - **Processing**（ビジュアルプログラミング環境 / 音声解析とシリアル通信）
 - **Logic Pro X**（DAW / 音声出力・ドラム音源の再生）
 - **BlackHole**（仮想オーディオルーティング / ProcessingでLogic Proの音を取得）
-- **Hairless MIDI <-> Serial Bridge**（シリアル信号をMIDIに変換するブリッジツール）
 - **Audio MIDI設定（IACドライバ）**（Mac標準 / 仮想MIDIポートの作成・接続）
 
 ### Arduino使用ライブラリ
