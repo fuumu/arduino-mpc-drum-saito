@@ -1,11 +1,11 @@
 # 卒業制作2025
 ## 1. 概要 
-自作キーパッド + DAW(Logic Pro) + RGB LEDマトリクスを使った自作MPC（Music Production Center）
+キーパッド + DAW(Logic Pro) + RGB LEDマトリクスを使った自作MPC（Music Production Center）
 
 ### *主な機能*
 
 - **キーパッド**  
-  自作キーパッドを押すと、PCの音楽制作ソフト（Logic Pro）に信号を送り、ドラム音や効果音などのサンプルを再生する
+  キーパッドを押すと、PCの音楽制作ソフト（Logic Pro）に信号を送り、ドラム音や効果音などのサンプルを再生する
 
 - **Logic Pro**  
   ArduinoからのMIDI信号をLogic Proで受信し、ソフトウェア音源を鳴らす
@@ -31,7 +31,6 @@
 
 ### *配線図*
 > ※この配線図はFritzingの都合により、以下の部品を代用品で表現しています
-> - キーパッド：実際にはTM1637搭載の2線式キーパッド（CLK：D2 , DIO：D3）を使用
 > - LEDマトリクス：実際には8×32のWS2812Bマトリクス（データピン：D6）を使用
 
 ![配線図](img/Arduino_mpc_drum_配線図.png)
@@ -45,7 +44,7 @@
 
 | モジュール名              | 用途                                | 使用ピン（Arduino Uno R4 WiFi）     |
 |---------------------------|-------------------------------------|--------------------------------------|
-| TM1637キーパッドモジュール | キー入力                         | CLK: D2 / DIO: D3                   |
+| キーパッド               | キー入力                                |                   |
 | WS2812B LEDマトリクス（8×32） | スペクトラムアナライザ表示           | データピン: D6                       |
 | Arduino Uno R4 WiFi       | 全体制御（MIDI送信・LED制御・入力処理） | -                                    |
 | PC（Logic Pro + FFT解析）            | 音声再生・FFT解析・LED表示データ送信      | USBシリアル通信                      |
@@ -63,7 +62,6 @@
 ### Arduino使用ライブラリ
 
 - **Adafruit_NeoPixel**（LEDマトリクス制御用ライブラリ）
-- **ErriezTM1637**（TM1637搭載キーパッドの読み取り用ライブラリ）
 
 ### Processing使用ライブラリ
 
@@ -115,6 +113,5 @@ BlackHoleは、macOS用の仮想オーディオドライバです。
 
 - [【Arduino】シリアルLED（WS2812B）を制御する](https://araisun.com/arduino-serial-led.html)
 - [ArduinoでFFT解析し、ピークの周波数を検出する](https://qiita.com/ricelectric/items/98a6d32b1bcfca598762)
-- [ErriezTM1637ライブラリ](https://github.com/Erriez/ErriezTM1637)
 - [arduinoとprocessingの連携手順](https://note.com/nakariho/n/n92611b3c0046)
 - [Audio MIDI設定ユーザガイド](https://support.apple.com/ja-jp/guide/audio-midi-setup/ams1013/mac)
