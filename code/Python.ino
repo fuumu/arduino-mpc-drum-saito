@@ -1,37 +1,49 @@
 import serial
-import mido
+import rtmidi
 
-# `SERIAL_PORT` と `MIDI_PORT_NAME` は環境に応じて設定してください。
-#  `SERIAL_PORT`：Arduinoが接続されているシリアルポート名
-#  `MIDI_PORT_NAME`：Audio MIDI設定で作成したIAC Driverのポート名
-    
-SERIAL_PORT = 'ここにシリアルポート名を入力（例: /dev/tty.usbmodemXXXX）'
-MIDI_PORT_NAME = 'ここにMIDIポート名を入力（例: IAC Driver バス 1）'
+# -------------------------------
+# シリアルポートとボーレート設定
+# -------------------------------
 
-BAUD_RATE = 115200
+# Arduinoのシリアルポート名（環境に合わせて変更）
+# 例: '/dev/tty.usbmodemXXXX'（Mac）や 'COM3'（Windows）
+port = '/dev/tty.YOUR_ARDUINO_PORT_HERE'
+baudrate = 115200
 
-# シリアルポートに接続
-ser = serial.Serial(SERIAL_PORT, BAUD_RATE)
-print(f'Connected to {SERIAL_PORT} at {BAUD_RATE} baud.')
+# -------------------------------
+# MIDI出力ポートの初期化
+# -------------------------------
 
-# MIDI出力ポートを開く
-midi_out = mido.open_output(MIDI_PORT_NAME)
-print(f'Sending MIDI to {MIDI_PORT_NAME}')
+midiout = rtmidi.MidiOut()
+available_ports = midiout.get_ports()
 
-# シリアルからのデータを読み取り、MIDIメッセージを送信
+if available_ports:
+    midiout.open_port(0)  # 最初のMIDIポートを使用（IAC Driverなど）
+    print(f"Connected to MIDI port: {available_ports[0]}")
+else:
+    print("No MIDI output ports found!")
+    exit()
+
+# -------------------------------
+# Arduinoとのシリアル接続
+# -------------------------------
+
+try:
+    ser = serial.Serial(port, baudrate)
+    print(f"Connected to Arduino on {port}")
+except serial.SerialException:
+    print(f"Could not open serial port {port}")
+    exit()
+
+print("Listening for MIDI messages from Arduino...")
+
+# -------------------------------
+# メインループ：MIDIメッセージを転送
+# -------------------------------
+
 while True:
-    try:
-        line = ser.readline().decode().strip()
-        print(f'Received: {line}')
-
-        if line == 'PAD1_ON':
-            midi_out.send(mido.Message('note_on', note=60, velocity=100))
-        elif line == 'PAD1_OFF':
-            midi_out.send(mido.Message('note_off', note=60, velocity=0))
-
-
-    except KeyboardInterrupt:
-        print("終了します")
-        break
-    except Exception as e:
-        print(f'エラー: {e}')
+    if ser.in_waiting >= 3:
+        msg = ser.read(3)
+        midi_bytes = [b for b in msg]
+        print(f"Sending MIDI: {midi_bytes}")
+        midiout.send_message(midi_bytes)
