@@ -1,13 +1,15 @@
 #include <Adafruit_NeoPixel.h>  // LED制御ライブラリ
 #include <NewPing.h>            // 超音波センサー用ライブラリ
-#include <MIDI.h>               // MIDI送信用ライブラリ
+#include "MIDI.h"              // MIDI送信用ライブラリ
+
+#define MIDI_CHANNEL_1 1
 
 // --- LEDマトリクス設定 ---
-#define PIN 6                   // LEDデータピン
+#define LED_PIN 6                   // LEDデータピン
 #define NUM_PIXELS 512          // LEDの総数（16列 × 32段）
 #define BRIGHTNESS 80           // 明るさ（0〜255）
 
-Adafruit_NeoPixel strip(NUM_PIXELS, PIN, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel strip(NUM_PIXELS, LED_PIN, NEO_GRB + NEO_KHZ800);
 
 // --- 超音波センサー設定 ---
 #define TRIG_PIN 10
