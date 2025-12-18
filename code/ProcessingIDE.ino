@@ -14,6 +14,8 @@ int rows = 8;   // 縦方向（周波数）
 int[][] spectrumHistory = new int[cols][rows];
 
 String distanceBuffer = "";
+float lastDistance = -1;
+float distanceThreshold = 3.0;  // cm単位での変化しきい値
 
 void setup() {
   size(600, 400);
@@ -22,11 +24,11 @@ void setup() {
   fft = new FFT(in.bufferSize(), in.sampleRate());
 
   printArray(Serial.list());
-  String portName = Serial.list()[5];  // 適切なポート番号に変更
+  String portName = Serial.list()[5];  // ← 環境に合わせて変更！
   myPort = new Serial(this, portName, 115200);
 
-  MidiBus.list();  // 利用可能なMIDIポートを確認
-  midi = new MidiBus(this, -1, "IAC Bus 1");  // 出力先を指定
+  MidiBus.list();  // 利用可能なMIDIポートを表示
+  midi = new MidiBus(this, -1, "IAC Bus 1");  // ← 正しいポート名に変更！
 }
 
 void draw() {
@@ -88,8 +90,15 @@ void processDistance(String raw) {
     float distance = Float.parseFloat(raw);
     println("📏 距離: " + distance + " cm");
 
-    int note = int(map(distance, 5, 100, 80, 40));
-    note = constrain(note, 40, 80);
+    // 前回と比べて変化が小さいなら無視
+    if (lastDistance >= 0 && abs(distance - lastDistance) < distanceThreshold) {
+      return;
+    }
+
+    lastDistance = distance;
+
+    float rawNote = map(distance, 5, 100, 100, 20);
+    int note = round(constrain(rawNote, 20, 100));
     sendMIDINote(note);
   } catch (Exception e) {
     println("⚠️ 距離データの解析に失敗: " + raw);
@@ -97,6 +106,7 @@ void processDistance(String raw) {
 }
 
 void sendMIDINote(int note) {
+  println("🎹 送信中のMIDIノート: " + note);
   midi.sendNoteOn(0, note, 100);
   delay(100);
   midi.sendNoteOff(0, note, 100);
