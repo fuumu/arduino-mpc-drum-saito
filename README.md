@@ -134,7 +134,7 @@ ArduinoからのMIDIノートをLogic Proに送信するための仮想MIDIポ�
 ArduinoとProcessingの間で、
 Arduino → Processing：距離センサーのデータを送信  
 Processing → Arduino：LEDの表示データを送信  
-このように双方向でやり取りすることで、リアルタイムなインタラクションを実現しています。
+このように双方向でやり取りすることで、動きや音にすぐ反応する仕組みを実現しています。
 
 ### ◎*リアルタイムFFT解析*  
 Logic Proで再生された音をBlackHoleを使ってProcessingに取り込み、 その場で周波数解析（FFT）を行います。  
